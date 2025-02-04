@@ -1,0 +1,5 @@
+apiVersion: v2
+name: webapp
+description: A simple webapp
+version: 0.1.0
+type: application

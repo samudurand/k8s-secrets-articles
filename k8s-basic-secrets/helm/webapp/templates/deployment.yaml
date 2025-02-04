@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+        - name: webapp
+          image: python:3.9-alpine
+          command: [ "sh", "-c" ]
+          args:
+            - |
+              echo '<html><body><h1>My Secret is: '$MY_SECRET'</h1></body></html>' > index.html
+              python3 -m http.server 8080
+          env:
+            - name: MY_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
+                  key: MY_SECRET_KEY
+          ports:
+            - containerPort: 8080
