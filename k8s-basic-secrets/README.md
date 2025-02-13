@@ -31,7 +31,7 @@ kubectl get pods
 
 ```sh
 cd ..
-helm install webapp helm/webapp/ -set secrets.MY_SECRET=123456a
+helm install webapp helm/webapp/ --set secrets.MY_SECRET=123456a
 ```
 
 5. Check that the pod is reachable by running this command and pasting the EXTERNAL-IP in a browser.
